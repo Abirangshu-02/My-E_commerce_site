@@ -496,11 +496,10 @@
                         "description": itm,
                         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4yd3j32TChSqb9Zme0bsRHxf3-nZao9UD_w&s",
                         "handler": function (response){
-                            // alert(response.razorpay_payment_id)
                             pyid = response.razorpay_payment_id
                             
                             $.ajax({
-                                url: "onlineCNT.php",
+                                url: "orderCNT.php",
                                 method: "post",
                                 data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tty": tyitms, "tamt": ttprice, "mod": ptype, "tid": pyid},
                                 success: function(response){
@@ -516,7 +515,7 @@
                 else if(ptype == 'cod')
                 {
                     $.ajax({
-                        url: "codCNT.php",
+                        url: "orderCNT.php",
                         method: "post",
                         data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tty": tyitms, "tamt": ttprice, "mod": ptype},
                         success: function(response){
