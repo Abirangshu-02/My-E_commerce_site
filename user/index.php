@@ -425,7 +425,7 @@
                                                             <i class="fas fa-star"></i>
                                                         </div>
                                                         <h4 class="mb-3">Rs. '.$data["price"].' / kg</h4>
-                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Buy Now</button>
+                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="buynow('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Buy Now</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -682,7 +682,6 @@
     <script>
         function addtocrt(pid)
         {
-            // alert(pid)
             $.ajax({
                 url: "cartdriver.php",
                 method: "post",
@@ -692,6 +691,20 @@
                         window.location.href="signin.php"
                     else
                         window.location.reload();
+                }
+            })
+        }
+        function buynow(pid)
+        {
+            $.ajax({
+                url: "buyCNT.php",
+                method: "post",
+                data: {"pid": pid},
+                success: function(response){
+                    if(response == "Failed")
+                        window.location.href="signin.php"
+                    else
+                        window.location.href = "Buycheckout.php";
                 }
             })
         }

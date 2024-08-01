@@ -213,14 +213,14 @@
     }
     function showbyname($data)
     {
-        $con=connect();
+        $con = connect();
         $sql = "select * from users where uname = '$data'";
         $res = mysqli_query($con,$sql);
         if(mysqli_num_rows($res) > 0)
         {
             $rpx = mysqli_fetch_assoc($res);
             $mail = $rpx['email'];
-            $sqlq = "select * from orders where umail = '$mail'";
+            $sqlq = "select * from orders where email = '$mail'";
             $resp = mysqli_query($con,$sqlq);
         }
         return $resp;
@@ -332,7 +332,7 @@
         $resp = mysqli_query($con,$sql);
         return $resp;
     }
-    function showcart($pid)
+    function showitems($pid)
     {
         $con = connect();
         $sql = "select * from products where id='$pid'";
@@ -352,6 +352,51 @@
         $sql = "update carts set quantity=quantity+'$st' where cartID='$cid'";
         $response = mysqli_query($con,$sql);
         return $response;
+    }
+    function buyinsert($pdid,$mail)
+    {
+        $con = connect();
+        $check = duplicate_vfy($pid,$mail);
+        if($check == 1)
+            return -1;
+        else
+        {
+            $sqlI = "insert into buynow(pid,email,quantity) values('$pdid','$mail','1')";
+            $resB = mysqli_query($con,$sqlI);
+            return $resB;
+        }
+    }
+    function duplicate_vfy($id,$mail)
+    {
+        $con = connect();
+        $sql = "select * from buynow where pid='$id' and email='$mail'";
+        $resp = mysqli_query($con,$sql);
+        $rec = mysqli_num_rows($resp);
+        if($rec > 0)
+            return 1;
+        else
+            return 0;
+    }
+    function buyitems($mail)
+    {
+        $con = connect();
+        $sql = "select * from buynow where email='$mail'";
+        $resp = mysqli_query($con,$sql);
+        return $resp;
+    }
+    function Buyquantitychange($mail,$st)
+    {
+        $con = connect();
+        $sql = "update buynow set quantity=quantity+'$st' where email='$mail'";
+        $response = mysqli_query($con,$sql);
+        return $response;
+    }
+    function BuyProduct_delete($mail)
+    {
+        $con = connect();
+        $sql = "delete from buynow where email='$mail'";
+        $resp = mysqli_query($con,$sql);
+        return $resp;
     }
     function orderbyCoD($mail, $shipadd, $ttitms, $ttprice, $ptype)
     {
@@ -375,7 +420,7 @@
             return $oid;
         }
     }
-    function shipittems($oid, $pids, $c_price, $qtys, $cid)
+    function shipittems_CART($oid, $pids, $c_price, $qtys, $cid)
     {
         $con = connect();
         $sql = "insert into shipping(orderid,productid,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
@@ -383,6 +428,18 @@
         if($response2)
         {
             $sqlD = "delete from carts where cartID='$cid'";
+            mysqli_query($con,$sqlD);
+        }
+        return $response2;
+    }
+    function shipittems_BUY($oid, $pids, $c_price, $qtys, $mail)
+    {
+        $con = connect();
+        $sql = "insert into shipping(orderid,productid,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
+        $response2 = mysqli_query($con,$sql);
+        if($response2)
+        {
+            $sqlD = "delete from buynow where email='$mail'";
             mysqli_query($con,$sqlD);
         }
         return $response2;

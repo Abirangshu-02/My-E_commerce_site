@@ -1,16 +1,34 @@
 <?php
     include('../admin/CRUD.php');
-    // session_start();
-    $cartid = $_POST['cartid'];
-    $state = $_POST['state'];
-    if($state == -1)
+    session_start();
+    $mail = $_SESSION['umail'];
+    if(isset($_SERVER['HTTP_REFERER']) && basename(parse_url($_SERVER['HTTP_REFERER'],PHP_URL_PATH)) == 'cart.php')
     {
-        $resp = quantitychange($cartid,$state);
-        echo "decreased";
+        $cartid = $_POST['cartid'];
+        $state = $_POST['state'];
+        if($state == -1)
+        {
+            $resp = quantitychange($cartid,$state);
+            echo "decreased";
+        }
+        if($state == 1)
+        {
+            $resp = quantitychange($cartid,$state);
+            echo "increased";
+        }
     }
-    if($state == 1)
+    if(isset($_SERVER['HTTP_REFERER']) && basename(parse_url($_SERVER['HTTP_REFERER'],PHP_URL_PATH)) == 'Buycheckout.php')
     {
-        $resp = quantitychange($cartid,$state);
-        echo "increased";
+        $state = $_POST['state'];
+        if($state == -1)
+        {
+            $resp = Buyquantitychange($mail,$state);
+            echo "decreased";
+        }
+        if($state == 1)
+        {
+            $resp = Buyquantitychange($mail,$state);
+            echo "increased";
+        }
     }
 ?>

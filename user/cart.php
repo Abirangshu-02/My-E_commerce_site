@@ -168,7 +168,7 @@
                                     $flag = 1;
                                     while($data = mysqli_fetch_assoc($resp))
                                     {
-                                        $response = showcart($data['pid']);
+                                        $response = showitems($data['pid']);
                                         while($pddata = mysqli_fetch_assoc($response))
                                         {
                                             $itmprice = $pddata["price"] * $data["quantity"];
@@ -189,7 +189,7 @@
                                                     <div class="input-group quantity mt-4" style="width: 100px;">
                                                         <div class="input-group-btn">
                                                             <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="decrease('.$data["cartID"].','.$data["quantity"].')">
-                                                            <i class="fa fa-minus"></i>
+                                                                <i class="fa fa-minus"></i>
                                                             </button>
                                                         </div>
                                                         <input type="text" class="form-control form-control-sm text-center border-0" value="'.$data["quantity"].'">
@@ -401,14 +401,13 @@
         }
         function decrease(cid,qty)
         {
-            if(qty==1)
+            if(qty == 1)
             {
                 $.ajax({
                     url: "cartitemDEL.php",
                     method: "post",
                     data: {"cartid": cid},
-                    success: function(response){
-                        // alert(response)
+                    success: function(response){                        
                         window.location.reload()
                     }
                 })

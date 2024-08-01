@@ -133,10 +133,10 @@
                                         <th scope="col">Total<br>Items</th>
                                         <th scope="col">Total<br>Price</th>
                                         <th scope="col">Order Time</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Zip-Code</th>
+                                        <th scope="col">Address-Zip</th>
                                         <th scope="col">Pay Type</th>
                                         <th scope="col">Transaction Id</th>
+                                        <th scope="col">Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,14 +149,14 @@
                                                 echo '
                                                 <tr>
                                                     <th scope="row">'.$sn++.'</th>
-                                                    <td>'.$dta["umail"].'</td>
-                                                    <td>'.$dta["items"].'</td>
-                                                    <td>'.$dta["price"].'</td>
-                                                    <td>'.$dta["time"].'</td>
-                                                    <td>'.$dta["address"].'</td>
-                                                    <td>'.$dta["zipcode"].'</td>
-                                                    <td>'.$dta["paytype"].'</td>
+                                                    <td>'.$dta["email"].'</td>
+                                                    <td>'.$dta["no_of_products"].'</td>
+                                                    <td>'.$dta["total_amount"].'</td>
+                                                    <td>'.$dta["order_date"].'</td>
+                                                    <td>'.$dta["ship_address_zip"].'</td>
+                                                    <td>'.$dta["paymode"].'</td>
                                                     <td>'.$dta["payid"].'</td>
+                                                    <td>'.$dta["status"].'</td>
                                                 </tr>';
                                             }
                                         }
@@ -168,14 +168,14 @@
                                                 echo '
                                                 <tr>
                                                     <th scope="row">'.$sn++.'</th>
-                                                    <td>'.$dta["umail"].'</td>
-                                                    <td>'.$dta["items"].'</td>
-                                                    <td>'.$dta["price"].'</td>
-                                                    <td>'.$dta["time"].'</td>
-                                                    <td>'.$dta["address"].'</td>
-                                                    <td>'.$dta["zipcode"].'</td>
-                                                    <td>'.$dta["paytype"].'</td>
+                                                    <td>'.$dta["email"].'</td>
+                                                    <td>'.$dta["no_of_products"].'</td>
+                                                    <td>'.$dta["total_amount"].'</td>
+                                                    <td>'.$dta["order_date"].'</td>
+                                                    <td>'.$dta["ship_address_zip"].'</td>
+                                                    <td>'.$dta["paymode"].'</td>
                                                     <td>'.$dta["payid"].'</td>
+                                                    <td>'.$dta["status"].'</td>
                                                 </tr>';
                                             }
                                         }

@@ -183,11 +183,7 @@
                                                     </tr>
                                                     <tr class="pt-4 ">
                                                         <td class="pe-5"><h5>Address: </h5></td>
-                                                        <td><span class="text-secondary"><?php echo $dta["address"]; ?></td>
-                                                    </tr>
-                                                    <tr class="pt-4 ">
-                                                        <td class="pe-5"><h5>ZIP-code: </h5></td>
-                                                        <td><span class="text-secondary"><?php echo $dta["zipcode"]; ?></td>
+                                                        <td><span class="text-secondary"><?php echo $dta["address_zip"]; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>

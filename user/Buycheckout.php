@@ -53,9 +53,9 @@
     <body>
 
         <!-- Spinner Start -->
-        <!-- <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
-        </div> -->
+        </div>
         <!-- Spinner End -->
 
 
@@ -154,7 +154,6 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Billing details</h1>
-                <!-- <form method="post" id="formorder"> -->
                     <div class="row g-5">
                         <div class="col-md-12 col-lg-6 col-xl-7">
                             <div class="form-item">
@@ -203,42 +202,47 @@
                                             <th scope="col">Product<br>Image</th>
                                             <th scope="col">Product<br>Name</th>
                                             <th scope="col">Price<br>(in Rs.)</th>
-                                            <th scope="col">Quantity<br>(in kg)</th>
+                                            <th scope="col">Quantity(in kg)</th>
                                             <th scope="col">Total<br>(in Rs.)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $subtotal = 0;      $total = 0;     $flag = 0;      $all_qty=0;     $types=0;
-                                            $resp = cartitems($_SESSION['umail']);
+                                            $resp = buyitems($_SESSION['umail']);
                                             $rows = mysqli_num_rows($resp);
                                             if($rows > 0)
                                             {
                                                 $flag = 1;
-                                                while($data = mysqli_fetch_assoc($resp))
+                                                $data = mysqli_fetch_assoc($resp);
+                                                $response = showitems($data['pid']);
+                                                while($pddata = mysqli_fetch_assoc($response))
                                                 {
-                                                    $response = showitems($data['pid']);
-                                                    while($pddata = mysqli_fetch_assoc($response))
-                                                    {
-                                                        $qty = $data["quantity"];
-                                                        $itmprice = $pddata["price"] * $qty;
-                                                        echo '
-                                                            <tr>
-                                                                <th scope="row">
-                                                                    <div class="d-flex align-items-center mt-2">
-                                                                        <img src="../admin/'.$pddata["image"].'" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
-                                                                    </div>
-                                                                </th>
-                                                                <td class="py-5">'.$pddata["name"].'</td>
-                                                                <td class="py-5">'.$pddata["price"].'</td>
-                                                                <td class="py-5">'.$qty.'</td>
-                                                                <td class="py-5">'.$itmprice.'</td>
-                                                            </tr>
-                                                        ';
-                                                        $types++;
-                                                        $subtotal += $itmprice;
-                                                        $all_qty += $qty;
-                                                    }
+                                                    $qty = $data["quantity"];
+                                                    $itmprice = $pddata["price"] * $qty;
+                                                    echo '
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="d-flex align-items-center mt-2">
+                                                                    <img src="../admin/'.$pddata["image"].'" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="Image of a Fruit or Vegetable">
+                                                                </div>
+                                                            </th>
+                                                            <td class="py-5">'.$pddata["name"].'</td>
+                                                            <td class="py-5">'.$pddata["price"].'</td>
+                                                            <td class="py-5">
+                                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="decrease('.$qty.')">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+                                                                    <span style="margin: 8px;">'.$qty.'</span>
+                                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="increase('.$qty.')">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td class="py-5">'.$itmprice.'</td>
+                                                        </tr>
+                                                    ';
+                                                    $subtotal += $itmprice;
+                                                    $all_qty += $qty;
                                                 }
                                             }
                                         ?>
@@ -457,6 +461,41 @@
     <script src="../admin/js/jquery.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        function increase(cid)
+        {
+            $.ajax({
+                url: "itemQTYdriver.php",
+                method: "post",
+                data: {"state": 1},
+                success: function(response){
+                    window.location.reload()
+                }
+            })
+        }
+        function decrease(qty)
+        {
+            if(qty == 1)
+            {
+                $.ajax({
+                    url: "buyitemDEL.php",
+                    method: "post",
+                    success: function(response){                        
+                        window.location.href="index.php";
+                    }
+                })
+            }
+            else
+            {
+                $.ajax({
+                    url: "itemQTYdriver.php",
+                    method: "post",
+                    data: {"state": -1},
+                    success: function(response){
+                        window.location.reload();
+                    }
+                })
+            }
+        }
         function placeorder()
         {
             var itm = "Item Orders"
@@ -464,7 +503,6 @@
             var phone = document.getElementById('phone').value
             var notes = document.getElementById('notes').value
             var ttitms = <?php echo $all_qty; ?>;
-            var tyitms = <?php echo $types; ?>;
             var ttprice = <?php echo $total; ?>;
             var ptype = document.getElementById('paygate').value
 
@@ -487,7 +525,7 @@
                             $.ajax({
                                 url: "orderCNT.php",
                                 method: "post",
-                                data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tty": tyitms, "tamt": ttprice, "mod": ptype, "tid": pyid},
+                                data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tamt": ttprice, "mod": ptype, "tid": pyid},
                                 success: function(response){
                                     alert(response)
                                     window.location.href="index.php";
@@ -503,7 +541,7 @@
                     $.ajax({
                         url: "orderCNT.php",
                         method: "post",
-                        data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tty": tyitms, "tamt": ttprice, "mod": ptype},
+                        data: {"shp": shipadd, "mobile": phone, "nts": notes, "np": ttitms, "tamt": ttprice, "mod": ptype},
                         success: function(response){
                             alert(response)
                             window.location.href="index.php";
@@ -518,5 +556,4 @@
         }
     </script>
     </body>
-
 </html>

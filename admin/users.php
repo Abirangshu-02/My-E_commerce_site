@@ -137,7 +137,6 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Date of Birth</th>
                                         <th scope="col">Address</th>
-                                        <th scope="col">Zip-Code</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -154,8 +153,7 @@
                                                     <td>'.$dta["contact"].'</td>
                                                     <td>'.$dta["email"].'</td>
                                                     <td>'.$dta["DoB"].'</td>
-                                                    <td>'.$dta["address"].'</td>
-                                                    <td>'.$dta["zipcode"].'</td>
+                                                    <td>'.$dta["address_zip"].'</td>
                                                 </tr>';
                                             }
                                         }
@@ -171,8 +169,7 @@
                                                     <td>'.$dta["contact"].'</td>
                                                     <td>'.$dta["email"].'</td>
                                                     <td>'.$dta["DoB"].'</td>
-                                                    <td>'.$dta["address"].'</td>
-                                                    <td>'.$dta["zipcode"].'</td>
+                                                    <td>'.$dta["address_zip"].'</td>
                                                 </tr>';
                                             }
                                         }
