@@ -386,10 +386,10 @@
     <script>
         function removecfm(cid)
         {
-            if(confirm("Are you sure to remove this item from CART!!"))
+            if(confirm("Are you sure to remove this item from CART !!"))
             {
                 $.ajax({
-                    url: "cartitemDEL.php",
+                    url: "itemDEL.php",
                     method: "post",
                     data: {"cartid": cid},
                     success: function(response){
@@ -404,7 +404,7 @@
             if(qty == 1)
             {
                 $.ajax({
-                    url: "cartitemDEL.php",
+                    url: "itemDEL.php",
                     method: "post",
                     data: {"cartid": cid},
                     success: function(response){                        

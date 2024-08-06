@@ -77,7 +77,7 @@
                     <a href="products.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Products</a>
                     <a href="orders.php" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Orders</a>
                     <a href="users.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
-                    <a href="logout.php" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>Logout</a>
+                    <a href="logout.php" class="nav-item nav-link"><i class="fa fa-times text-danger"></i>Logout</a>
                 </div>
             </nav>
         </div>
