@@ -1,6 +1,6 @@
 <?php
     include('../phpmailer/PHPMailerAutoload.php');
-
+    $adminmail = "abirangshu.gc2@gmail.com";    // Change this email accordingly. This should be a valid email. Admin and User emails are sent from this Email
     function connect()
     {
         $conn = mysqli_connect("localhost","root","","shopping");
@@ -38,6 +38,7 @@
     }
     function akyretrive($data) //password retrive sent
     {
+        global $adminmail;
         $rcv = infock($data);
         $rec = mysqli_num_rows($rcv);
         if($rec > 0)
@@ -52,12 +53,12 @@
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
 
-            $mail->Username = 'abirangshu.gc2@gmail.com';
+            $mail->Username = $adminmail;
             $mail->Password = 'rjhfogthqdvkdedh';
 
-            $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
+            $mail->setFrom($adminmail,'Fruitables');
             $mail->addAddress($data['email']);
-            $mail->addReplyTo('abirangshu.gc2@gmail.com');
+            $mail->addReplyTo($adminmail);
 
             $mail->isHTML(true);
             $mail->Subject = 'Password Retrival Mail';
@@ -266,6 +267,7 @@
     }
     function ukyretrive($data) // user password retrive
     {
+        global $adminmail;
         $rcv = userinfo($data);
         $rec = mysqli_num_rows($rcv);
         if($rec > 0)
@@ -280,12 +282,12 @@
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
 
-            $mail->Username = 'abirangshu.gc2@gmail.com';
+            $mail->Username = $adminmail;
             $mail->Password = 'rjhfogthqdvkdedh';
 
-            $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
+            $mail->setFrom($adminmail,'Fruitables');
             $mail->addAddress($data['email']);
-            $mail->addReplyTo('abirangshu.gc2@gmail.com');
+            $mail->addReplyTo($adminmail);
 
             $mail->isHTML(true);
             $mail->Subject = 'Password Retrival Mail';
@@ -425,6 +427,7 @@
     }
     function reviewMail($data) // user password retrive
     {
+        global $adminmail;
         $nm = $data['qname'];
         $em = $data['qemail'];
 
@@ -436,12 +439,12 @@
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
 
-        $mail->Username = 'abirangshu.gc2@gmail.com';
+        $mail->Username = $adminmail;
         $mail->Password = 'rjhfogthqdvkdedh';
 
-        $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
+        $mail->setFrom($adminmail,'Fruitables');
         $mail->addAddress($em);
-        $mail->addReplyTo('abirangshu.gc2@gmail.com');
+        $mail->addReplyTo($adminmail);
 
         $mail->isHTML(true);
         $mail->Subject = 'Query Mail';
