@@ -76,8 +76,8 @@
                     <a href="index.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="products.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Products</a>
                     <a href="orders.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Orders</a>
-                    <a href="users.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Users</a>
-                    <a href="review.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Reviews</a>
+                    <a href="users.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
+                    <a href="review.php" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Reviews</a>
                     <a href="logout.php" class="nav-item nav-link"><i class="fa fa-times text-danger"></i>Logout</a>
                 </div>
             </nav>
@@ -108,7 +108,7 @@
                     }
                 ?>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <a href="users.php" class="btn btn-outline-secondary m-2">All Users</a>
+                    <a href="users.php" class="btn btn-outline-secondary m-2">All Reviews</a>
                     <div class="nav-item dropdown">
                         <a href="index.php" class="nav-link">
                             <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
@@ -124,17 +124,15 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="col-12">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">USERS</h6>
+                        <h6 class="mb-4">REVIEWS</h6>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Contact</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Date of Birth</th>
-                                        <th scope="col">Address</th>
+                                        <th scope="col">Message</th>
                                     </tr>
                                 </thead>
                                 <tbody>

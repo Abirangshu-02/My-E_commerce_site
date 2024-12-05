@@ -65,7 +65,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
                         <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Fruitable@excorg.in</a></small>
                     </div>
                     <div class="top-link pe-2">
                         <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
@@ -83,14 +83,13 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="index.php" class="nav-item nav-link">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Shop</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="cart.php" class="dropdown-item">Cart</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <?php
                             if(isset($_SESSION['umail']))
@@ -217,7 +216,7 @@
                                                 $flag = 1;
                                                 while($data = mysqli_fetch_assoc($resp))
                                                 {
-                                                    $response = showitems($data['pid']);
+                                                    $response = showitems($data['product_id']);
                                                     while($pddata = mysqli_fetch_assoc($response))
                                                     {
                                                         $qty = $data["quantity"];
@@ -397,12 +396,12 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="Dashboard.php">My Account</a>
-                            <a class="btn-link" href="shop.php">Shop</a>
-                            <a class="btn-link" href="cart.php">Shopping Cart</a>
-                            <a class="btn-link" href="wish.php">Wishlist</a>
-                            <a class="btn-link" href="history.php">Order History</a>
-                            <a class="btn-link" href="logout.php">LOGOUT</a>
+                            <a class="btn-link" href="">My Account</a>
+                            <a class="btn-link" href="">Shop</a>
+                            <a class="btn-link" href="">Shopping Cart</a>
+                            <a class="btn-link" href="">Wishlist</a>
+                            <a class="btn-link" href="">Order History</a>
+                            <a class="btn-link" href="">LOGOUT</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">

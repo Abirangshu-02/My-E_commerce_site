@@ -55,7 +55,7 @@
             $mail->Username = 'abirangshu.gc2@gmail.com';
             $mail->Password = 'rjhfogthqdvkdedh';
 
-            $mail->setFrom('abirangshu.gc2@gmail.com','Shopping Site');
+            $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
             $mail->addAddress($data['email']);
             $mail->addReplyTo('abirangshu.gc2@gmail.com');
 
@@ -149,7 +149,7 @@
                         $path = $rp2['image'];
                         unlink($path);
 
-                        $sql = "update products set category='$catp', name='$nm', price='$pr', stock='$stk', image='$ppath' where id='$pid'";
+                        $sql = "update products set category='$catp', name='$nm', price='$pr', stock='$stk', image='$ppath' where product_id='$pid'";
                         $res = mysqli_query($con,$sql);
                         return 1;
                     }
@@ -164,7 +164,7 @@
         }
         else
         {
-            $sql = "update products set category='$catp', name='$nm', price='$pr', stock='$stk' where id='$pid'";
+            $sql = "update products set category='$catp', name='$nm', price='$pr', stock='$stk' where product_id='$pid'";
             $res = mysqli_query($con,$sql);
             return 1;
         }
@@ -176,7 +176,7 @@
         $rp2 = mysqli_fetch_assoc($rp1);
         $path = $rp2['image'];
 
-        $sql = "delete from products where id='$id'";
+        $sql = "delete from products where product_id='$id'";
         $resp = mysqli_query($con, $sql);
         if($resp == 1)
             unlink($path);
@@ -186,7 +186,7 @@
     function display_by_id($id)    //query to diplay data
     {
         $con = connect();
-        $sql = "select * from products where id = '$id'";
+        $sql = "select * from products where product_id = '$id'";
         $resp = mysqli_query($con, $sql);
         return $resp;
     }
@@ -283,7 +283,7 @@
             $mail->Username = 'abirangshu.gc2@gmail.com';
             $mail->Password = 'rjhfogthqdvkdedh';
 
-            $mail->setFrom('abirangshu.gc2@gmail.com','Shopping Site');
+            $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
             $mail->addAddress($data['email']);
             $mail->addReplyTo('abirangshu.gc2@gmail.com');
 
@@ -301,6 +301,21 @@
         else
             return -1;
     }
+    function update_user_info($data)
+    {
+        $conn = connect();
+        $un = $data['uname'];
+        $uc = $data["ucontact"];
+        $umail = $data['uemail'];
+        $upk = $data["upkey"];
+        $udob = $data["Dob"];
+        $uadd = $data["location"];
+        
+        $sql = "update users set uname='$un', contact='$uc', password='$upk', DoB='$udob', address_zip='$uadd' where email='$umail'";
+        $rsp = mysqli_query($conn,$sql);
+        return 1;
+
+    }
     function add_to_cart($pid,$mail)
     {
         $con = connect();
@@ -309,7 +324,7 @@
             return -1;
         else
         {
-            $sql = "insert into carts(pid, usermail, quantity) values('$pid','$mail','1')";
+            $sql = "insert into carts(product_id, usermail, quantity) values('$pid','$mail','1')";
             $res = mysqli_query($con,$sql);
             return $res;
         }
@@ -317,7 +332,7 @@
     function duplicate_check($id,$mail)
     {
         $con = connect();
-        $sql = "select * from carts where pid='$id' and usermail='$mail'";
+        $sql = "select * from carts where product_id='$id' and usermail='$mail'";
         $resp = mysqli_query($con,$sql);
         $rec = mysqli_num_rows($resp);
         if($rec > 0)
@@ -335,7 +350,7 @@
     function showitems($pid)
     {
         $con = connect();
-        $sql = "select * from products where id='$pid'";
+        $sql = "select * from products where product_id='$pid'";
         $response = mysqli_query($con,$sql);
         return $response;
     }
@@ -361,7 +376,7 @@
             return -1;
         else
         {
-            $sqlI = "insert into buynow(pid,email,quantity) values('$pdid','$mail','1')";
+            $sqlI = "insert into buynow(product_id,email,quantity) values('$pdid','$mail','1')";
             $resB = mysqli_query($con,$sqlI);
             return $resB;
         }
@@ -369,7 +384,7 @@
     function duplicate_vfy($id,$mail)
     {
         $con = connect();
-        $sql = "select * from buynow where pid='$id' and email='$mail'";
+        $sql = "select * from buynow where product_id='$id' and email='$mail'";
         $resp = mysqli_query($con,$sql);
         $rec = mysqli_num_rows($resp);
         if($rec > 0)
@@ -398,6 +413,47 @@
         $resp = mysqli_query($con,$sql);
         return $resp;
     }
+    function insReview($data)
+    {
+        $con = connect();
+        $nm = $data['qname'];
+        $em = $data['qemail'];
+        $mg = $data['msg'];
+        $sql = "insert into reviews(name,email,message) values('$nm','$em','$mg')";
+        $rsp = mysqli_query($con,$sql);
+        return $rsp;
+    }
+    function reviewMail($data) // user password retrive
+    {
+        $nm = $data['qname'];
+        $em = $data['qemail'];
+
+        $mail = new phpmailer;
+        $mail->isSMTP();
+
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+
+        $mail->Username = 'abirangshu.gc2@gmail.com';
+        $mail->Password = 'rjhfogthqdvkdedh';
+
+        $mail->setFrom('abirangshu.gc2@gmail.com','Fruitables');
+        $mail->addAddress($em);
+        $mail->addReplyTo('abirangshu.gc2@gmail.com');
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Query Mail';
+        $message = "";
+        $message = $message."Hi, <b>".$nm."</b>.<br>Thank you for contacting us.<br>We will get back to you soon !! <i>";
+        $mail->Body = $message;
+
+        if($mail->send())
+            return 1;
+        else
+            return 0;
+    }
     function orderbyCoD($mail, $shipadd, $ttitms, $ttprice, $ptype)
     {
         $con = connect();
@@ -423,7 +479,7 @@
     function shipittems_CART($oid, $pids, $c_price, $qtys, $cid)
     {
         $con = connect();
-        $sql = "insert into shipping(orderid,productid,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
+        $sql = "insert into shipping(order_id,product_id,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
         $response2 = mysqli_query($con,$sql);
         if($response2)
         {
@@ -435,7 +491,7 @@
     function shipittems_BUY($oid, $pids, $c_price, $qtys, $mail)
     {
         $con = connect();
-        $sql = "insert into shipping(orderid,productid,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
+        $sql = "insert into shipping(order_id,product_id,price_at_order,quantity) values('$oid','$pids','$c_price','$qtys')";
         $response2 = mysqli_query($con,$sql);
         if($response2)
         {

@@ -36,9 +36,9 @@
     <body>
 
         <!-- Spinner Start -->
-        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <!-- <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
-        </div>
+        </div> -->
         <!-- Spinner End -->
 
 
@@ -48,7 +48,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
                         <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Fruitables@excorg.in</a></small>
                     </div>
                     <div class="top-link pe-2">
                         <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
@@ -59,23 +59,20 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="index.php" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Shop</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="cart.php" class="dropdown-item">Cart</a>
-                                    <!-- <a href="checkout.php" class="dropdown-item">Chackout</a> -->
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         
                         <div class="d-flex m-3 me-0">
@@ -182,7 +179,7 @@
                             </div>
                             <div class="featurs-content text-center">
                                 <h5>Free Shipping</h5>
-                                <p class="mb-0">Free on order over $300</p>
+                                <p class="mb-0">Free on order over ₹500</p>
                             </div>
                         </div>
                     </div>
@@ -231,7 +228,7 @@
                 <div class="tab-class text-center">
                     <div class="row g-4">
                         <div class="col-lg-4 text-start mb-5">
-                            <h1>Our Organic Products</h1>
+                            <h1>Organic Products</h1>
                         </div>
                     </div>
                     <div class="tab-content">
@@ -257,8 +254,8 @@
                                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                     <h4>'.$data["name"].'</h4>
                                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                        <p class="text-dark fs-5 fw-bold mb-0">Rs.'.$data["price"].' / kg</p>
-                                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
+                                                                        <p class="text-dark fs-5 fw-bold mb-0">₹'.$data["price"].' / kg</p>
+                                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["product_id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -267,9 +264,7 @@
                                                     $c++;
                                                 }
                                             }
-                                            // <a href="cartdriver.php?pos=scroll1&itmid='.$data["id"].'" class="btn border border-secondary rounded-pill px-3 text-primary" id="scroll"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</a>
                                         ?>
-                                        
                      </div>
                 </div>      
             </div>
@@ -314,7 +309,7 @@
                                 <div class="px-4 rounded-bottom">
                                     <div class="service-content bg-secondary text-center p-4 rounded">
                                         <h5 class="text-white">Exotic Vegitable</h5>
-                                        <h3 class="mb-0">Discount 30$</h3>
+                                        <h3 class="mb-0">Discount ₹50</h3>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +322,7 @@
 
 
         <!-- Vesitable Shop Start-->
-        <div class="container-fluid vesitable py-5" id="scroll2">
+        <div class="container-fluid vesitable py-5"  id="scroll3">
             <div class="container py-5">
                 <h1 class="mb-0">Fresh Organic Vegetables</h1>
                 <div class="owl-carousel vegetable-carousel justify-content-center">
@@ -340,12 +335,12 @@
                                     <div class="vesitable-img">
                                         <img src="../admin/'.$data["image"].'" class="rounded-top" alt="" width="350" height="250">
                                     </div>
-                                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">'.$data["category"].'</div>
+                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">'.$data["category"].'</div>
                                     <div class="p-4 rounded-bottom">
                                         <h4>'.$data["name"].'</h4>
                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-0">Rs.'.$data["price"].' / kg</p>
-                                            <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
+                                            <p class="text-dark fs-5 fw-bold mb-0">₹'.$data["price"].' / kg</p>
+                                            <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["product_id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -376,8 +371,8 @@
                                     <div class="p-4 rounded-bottom">
                                         <h4>'.$data["name"].'</h4>
                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-0">Rs.'.$data["price"].' / kg</p>
-                                            <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
+                                            <p class="text-dark fs-5 fw-bold mb-0">₹'.$data["price"].' / kg</p>
+                                            <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addtocrt('.$data["product_id"].')"><i class="fa fa-shopping-bag text-primary"></i> Add to cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -386,7 +381,7 @@
                     ?>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
         <!-- Fruit Shop End -->
 
 
@@ -424,8 +419,8 @@
                                                             <i class="fas fa-star text-primary"></i>
                                                             <i class="fas fa-star"></i>
                                                         </div>
-                                                        <h4 class="mb-3">Rs. '.$data["price"].' / kg</h4>
-                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="buynow('.$data["id"].')"><i class="fa fa-shopping-bag text-primary"></i> Buy Now</button>
+                                                        <h4 class="mb-3">₹ '.$data["price"].' / kg</h4>
+                                                        <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="buynow('.$data["product_id"].')"><i class="fa fa-shopping-bag text-primary"></i> Buy Now</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -621,11 +616,11 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="Dashboard.php">My Account</a>
-                            <a class="btn-link" href="shop.php">Shop</a>
-                            <a class="btn-link" href="cart.php">Shopping Cart</a>
-                            <a class="btn-link" href="wish.php">Wishlist</a>
-                            <a class="btn-link" href="history.php">Order History</a>
+                            <a class="btn-link" href="">My Account</a>
+                            <a class="btn-link" href="">Shop</a>
+                            <a class="btn-link" href="">Shopping Cart</a>
+                            <a class="btn-link" href="">Wishlist</a>
+                            <a class="btn-link" href="">Order History</a>
                             <a class="btn-link" href="">International Orders</a>
                         </div>
                     </div>
@@ -633,7 +628,7 @@
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Contact</h4>
                             <p>Address: 1429 Netus Rd, NY 48247</p>
-                            <p>Email: Example@gmail.com</p>
+                            <p>Email: Fruitables@excorg.in</p>
                             <p>Phone: +0123 4567 8910</p>
                             <p>Payment Accepted</p>
                             <img src="img/payment.png" class="img-fluid" alt="">

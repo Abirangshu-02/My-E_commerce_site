@@ -34,9 +34,9 @@
     <body>
 
         <!-- Spinner Start -->
-        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <!-- <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
-        </div>
+        </div> -->
         <!-- Spinner End -->
 
         <?php
@@ -75,13 +75,10 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="index.php" class="nav-item nav-link">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Shop</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="cart.php" class="dropdown-item">Cart</a>
-                                    <!-- <a href="checkout.php" class="dropdown-item">Checkout</a> -->
-                                    <a href="#" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
                             <a href="#" class="nav-item nav-link">Contact</a>
@@ -113,24 +110,63 @@
 
 
         <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+        <div class="modal fade" id="updateinfo" tabindex="-1" data-bs-backdrop="static" aria-labelledby="updateModalLabel" aria-hidden="true"> <!--aria changed ?? -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateModalLabel">Update Info</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form action="" method="post">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="updateName" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="updateName" name="uname" placeholder="Username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updatePhone" class="form-label">Contact</label>
+                                    <input type="number" class="form-control" id="updatePhone" name="ucontact" placeholder="Phone number" min="0" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="uemail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="uemail" name="uemail" placeholder="Your email" min="0" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="upassword" class="form-label">Password</label>
+                                    <input type="text" class="form-control" id="upassword" name="upkey" placeholder="New password" min="0" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Dob" class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="Dob" name="Dob" min="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="Your address" min="0">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="updateU" class="btn btn-success">Update</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Modal Search End -->
-
+        <?php
+            if(isset($_POST['updateU']))
+            {
+                $rsp = update_user_info($_POST);
+                if($rsp == 1)
+                    echo "<meta http-equiv='refresh' content='0;url=".$_SERVER['HTTP_REFERER']."'>";
+                else
+                {
+                    ?>
+                    <script>alert("Updation Failed")</script>
+                    <?php
+                }
+            }
+        ?>
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
@@ -158,7 +194,7 @@
                                             </div>
                                             <div class="col-lg-6 px-xl-10">
                                                 <div class="d-lg-inline-block py-1-9  px-sm-6 mb-1-9 rounded mb-4">
-                                                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                                                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#updateinfo" onclick="editinfo('<?php echo $_SESSION['umail']; ?>')"><i class="fas fa-search text-primary"></i></button>
                                                 </div>
                                                 <table>
                                                     <tr class="py-4">
@@ -249,11 +285,11 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="Dashboard.php">My Account</a>
-                            <a class="btn-link" href="shop.php">Shop</a>
-                            <a class="btn-link" href="cart.php">Shopping Cart</a>
-                            <a class="btn-link" href="wish.php">Wishlist</a>
-                            <a class="btn-link" href="history.php">Order History</a>
+                            <a class="btn-link" href="">My Account</a>
+                            <a class="btn-link" href="">Shop</a>
+                            <a class="btn-link" href="">Shopping Cart</a>
+                            <a class="btn-link" href="">Wishlist</a>
+                            <a class="btn-link" href="">Order History</a>
                             <a class="btn-link" href="">International Orders</a>
                         </div>
                     </div>
@@ -306,6 +342,29 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        function editinfo(user)
+        {
+            // alert(user);
+            $.ajax({
+                url: "userinfoCT.php",
+                method: "post",
+                data: {"usermail": user},
+                success: function(response)
+                {
+                    // alert(response)
+                    var info = JSON.parse(response)
+                    document.getElementById("updateName").value = info.uname
+                    document.getElementById("updatePhone").value = info.contact
+                    document.getElementById("uemail").value = info.email
+                    document.getElementById("upassword").value = info.password
+                    document.getElementById("Dob").value = info.DoB
+                    document.getElementById("location").value = info.address_zip
+                    $("#updateinfo").modal('show')
+                }
+            })
+        }
+    </script>
     </body>
 
 </html>

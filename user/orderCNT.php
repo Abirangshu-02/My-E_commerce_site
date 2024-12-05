@@ -20,9 +20,9 @@
             $cart_items = cartitems($mail);
             while($data = mysqli_fetch_assoc($cart_items))
             {
-                $p_info = showitems($data['pid']);
+                $p_info = showitems($data['product_id']);
                 $p_cost = mysqli_fetch_assoc($p_info);
-                $ship_resp = shipittems_CART($resp, $data['pid'], $p_cost['price'], $data['quantity'], $data['cartID']);
+                $ship_resp = shipittems_CART($resp, $data['product_id'], $p_cost['price'], $data['quantity'], $data['cartID']);
                 $countitms++;
             }
             if($countitms == $types)
@@ -38,9 +38,9 @@
             $cart_items = cartitems($mail);
             while($data = mysqli_fetch_assoc($cart_items))
             {
-                $p_info = showitems($data['pid']);
+                $p_info = showitems($data['product_id']);
                 $p_cost = mysqli_fetch_assoc($p_info);
-                $ship_resp = shipittems_CART($resp, $data['pid'], $p_cost['price'], $data['quantity'], $data['cartID']);
+                $ship_resp = shipittems_CART($resp, $data['product_id'], $p_cost['price'], $data['quantity'], $data['cartID']);
                 $countitms++;
             }
             if($countitms == $types)
@@ -66,9 +66,9 @@
 
             $byitems = buyitems($mail);
             $data = mysqli_fetch_assoc($byitems);
-            $p_info = showitems($data['pid']);
+            $p_info = showitems($data['product_id']);
             $p_cost = mysqli_fetch_assoc($p_info);
-            $ship_resp = shipittems_BUY($resp, $data['pid'], $p_cost['price'], $data['quantity'], $mail);
+            $ship_resp = shipittems_BUY($resp, $data['product_id'], $p_cost['price'], $data['quantity'], $mail);
 
             if($ship_resp)
                 echo "Order Placed Successfully";
@@ -82,9 +82,9 @@
 
             $byitems = buyitems($mail);
             $data = mysqli_fetch_assoc($byitems);
-            $p_info = showitems($data['pid']);
+            $p_info = showitems($data['product_id']);
             $p_cost = mysqli_fetch_assoc($p_info);
-            $ship_resp = shipittems_BUY($resp, $data['pid'], $p_cost['price'], $data['quantity'], $mail);
+            $ship_resp = shipittems_BUY($resp, $data['product_id'], $p_cost['price'], $data['quantity'], $mail);
             
             if($ship_resp)
                 echo "Order Placed Successfully";

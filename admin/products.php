@@ -76,6 +76,7 @@
                     <a href="products.php" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>Products</a>
                     <a href="orders.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Orders</a>
                     <a href="users.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
+                    <a href="review.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Reviews</a>
                     <a href="logout.php" class="nav-item nav-link"><i class="fa fa-times text-danger"></i>Logout</a>
                 </div>
             </nav>
@@ -117,7 +118,7 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="col-12">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Products Table</h6>
+                        <h6 class="mb-4">PRODUCTS</h6>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -148,14 +149,14 @@
                                                         <th scope="row">'.$sn++.'</th>
                                                         <td>'.$dta["category"].'</td>
                                                         <td>'.$dta["name"].'</td>
-                                                        <td>'.$dta["price"].'</td>
+                                                        <td>₹ '.$dta["price"].'</td>
                                                         <td>'.$dta["stock"].'</td>
                                                         <td>
                                                             <img src="'.$dta["image"].'" width="58px">
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary m-2" onclick="editP('.$dta["id"].')">Edit</button>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger m-2" onclick="delP('.$dta["id"].')">Delete</button>
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary m-2" onclick="editP('.$dta["product_id"].')">Edit</button>
+                                                            <button type="button" class="btn btn-sm btn-outline-danger m-2" onclick="delP('.$dta["product_id"].')">Delete</button>
                                                         </td>
                                                     </tr>';
                                                 }
@@ -172,14 +173,14 @@
                                                     <th scope="row">'.$sn++.'</th>
                                                     <td>'.$dta["category"].'</td>
                                                     <td>'.$dta["name"].'</td>
-                                                    <td>'.$dta["price"].'</td>
+                                                    <td>₹ '.$dta["price"].'</td>
                                                     <td>'.$dta["stock"].'</td>
                                                     <td>
                                                         <img src="'.$dta["image"].'" width="58px">
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary m-2" onclick="editP('.$dta["id"].')">Edit</button>
-                                                        <button type="button" class="btn btn-sm btn-outline-danger m-2" onclick="delP('.$dta["id"].')">Delete</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary m-2" onclick="editP('.$dta["product_id"].')">Edit</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger m-2" onclick="delP('.$dta["product_id"].')">Delete</button>
                                                     </td>
                                                 </tr>';
                                             }
@@ -217,7 +218,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="itemPrice" class="form-label">Price</label>
-                                    <input type="number" class="form-control" id="itemPrice" name="iprice" placeholder="Price for each" min="0" required>
+                                    <input type="number" class="form-control" id="itemPrice" name="iprice" placeholder="Price / Kg" min="0" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="itemStock" class="form-label">Stock</label>
@@ -274,7 +275,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="updatePrice" class="form-label">Price</label>
-                                    <input type="number" class="form-control" id="updatePrice" name="uprice" placeholder="Price for each" min="0" required>
+                                    <input type="number" class="form-control" id="updatePrice" name="uprice" placeholder="Price / Kg" min="0" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="updateStock" class="form-label">Stock</label>

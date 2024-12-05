@@ -3,19 +3,11 @@
 <?php
     include('../admin/CRUD.php');
     session_start();
-    if(!isset($_SESSION['umail']))
-    {
-        header('location:signin.php');
-    }
-    else
-    {
-        $rsp = userinfo($_SESSION['umail']);
-        $dta = mysqli_fetch_assoc($rsp);
-    }
+    ob_start();
 ?>
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Cart</title>
+        <title>Fruitables - Vegetable Website Template</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -75,28 +67,35 @@
                         <div class="navbar-nav mx-auto">
                             <a href="index.php" class="nav-item nav-link">Home</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="cart.php" class="dropdown-item active">Cart</a>
+                                    <a href="cart.php" class="dropdown-item">Cart</a>
                                 </div>
                             </div>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                            <a href="contact.php" class="nav-item nav-link active">Contact</a>
                         </div>
-                        <?php
-                            if(isset($_SESSION['umail']))
-                            {
-                                $cart = cartitems($_SESSION['umail']);
-                                $items = mysqli_num_rows($cart);
-                            }
-                            else
-                                $items = 0;
-                        ?>
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="cart.php" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><?php echo $items; ?></span>
-                            </a>
+                            <!-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
+                            <?php
+                                if(isset($_SESSION['umail']))
+                                {
+                                    $cart = cartitems($_SESSION['umail']);
+                                    $items = mysqli_num_rows($cart);
+                                    echo '
+                                        <a href="cart.php" class="position-relative me-4 my-auto">
+                                            <i class="fa fa-shopping-bag fa-2x"></i>
+                                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">'.$items.'</span>
+                                        </a>
+                                    ';
+                                    
+                                }
+                                else
+                                    echo '
+                                        <a href="cart.php" class="position-relative me-4 my-auto">
+                                            <i class="fa fa-shopping-bag fa-2x"></i>
+                                        </a>
+                                    ';
+                            ?>
                             <a href="Dashboard.php" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
@@ -130,145 +129,89 @@
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6"><?php echo $dta['uname']?>'s Cart</h1>
+            <h1 class="text-center text-white display-6">Contact</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-white">Cart</li>
+                <li class="breadcrumb-item active text-white">Contact</li>
             </ol>
         </div>
         <!-- Single Page Header End -->
 
 
-        <!-- Cart Page Start -->
-        <div class="container-fluid py-5">
+        <!-- Contact Start -->
+        <div class="container-fluid contact py-5">
             <div class="container py-5">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Products</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity (in kg)</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $subtotal = 0;      $total = 0;     $flag = 0;
-                                $resp = cartitems($_SESSION['umail']);
-                                $rows = mysqli_num_rows($resp);
-                                if($rows > 0)
+                <div class="p-5 bg-light rounded">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="text-center mx-auto" style="max-width: 700px;">
+                                <h1 class="text-primary">Get in touch</h1>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="h-100 rounded">
+                                <iframe class="rounded w-100" 
+                                style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd" 
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <form action="" class="" method="post">
+                                <input type="text" name="qname" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
+                                <input type="email" name="qemail" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
+                                <textarea name="msg" class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
+                                <button name="send" class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
+                            </form>
+                        <?php
+                            if(isset($_POST['send']))
+                            {
+                                $rsp = insReview($_POST);
+                                if($rsp)
                                 {
-                                    $flag = 1;
-                                    while($data = mysqli_fetch_assoc($resp))
+                                    $mrsp = reviewMail($_POST);
+                                    if($mrsp)
                                     {
-                                        $response = showitems($data['product_id']);
-                                        while($pddata = mysqli_fetch_assoc($response))
-                                        {
-                                            $itmprice = $pddata["price"] * $data["quantity"];
-                                            echo '
-                                            <tr>
-                                                <th scope="row">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="../admin/'.$pddata["image"].'" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <p class="mb-0 mt-4">'.$pddata["name"].'</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 mt-4">Rs. '.$pddata["price"].'</p>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="decrease('.$data["cartID"].','.$data["quantity"].')">
-                                                                <i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <input type="text" class="form-control form-control-sm text-center border-0" value="'.$data["quantity"].'">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="increase('.$data["cartID"].')">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 mt-4">Rs. '.$itmprice.'</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-md rounded-circle bg-light border mt-4" onclick="removecfm('.$data["cartID"].')">
-                                                        <i class="fa fa-times text-danger"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            ';
-                                            $subtotal += $itmprice;
-                                        }
+                                        header("location:index.php");
                                     }
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row g-4 justify-content-end mt-5">
-                    <div class="col-8"></div>
-                    <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                        <div class="bg-light rounded">
-                            <div class="p-4">
-                                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                                <div class="d-flex justify-content-between mb-4">
-                                    <h5 class="mb-0 me-4">Subtotal:</h5>
-                                    <p class="mb-0">Rs. <?php echo $subtotal?></p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <h5 class="mb-0 me-4">Shipping</h5>
-                                    <div class="">
-                                        <?php
-                                        if($flag == 1)
-                                        {
-                                            if($subtotal < 500)
-                                            {
-                                                $total = $subtotal + 50;
-                                                echo '<p class="mb-0">Flat rate: Rs. 50</p>';
-                                            }
-                                            else
-                                            {
-                                                $total = $subtotal;
-                                                echo '<p class="mb-0">Free Shipping</p>';
-                                            }
-                                        }
-                                        else
-                                            echo '<p class="mb-0">No Items to ship</p>';
-                                        ?>
-                                    </div>
-                                </div>
-                                <!-- <p class="mb-0 text-end">Shipping to Ukraine.</p> -->
-                            </div>
-                            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                                <h5 class="mb-0 ps-4 me-4">Total</h5>
-                                <p class="mb-0 pe-4">Rs. <?php echo $total?></p>
-                            </div>
-                            <?php
-                                if($subtotal == 0)
-                                {
-                                    echo '<a class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Proceed Checkout</a>';
                                 }
                                 else
                                 {
-                                    echo '<a class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" href="checkout.php">Proceed Checkout</a>';
+                                    ?>
+                                    <script>alert("Failed !!")</script>
+                                    <?php
                                 }
-                            ?>
+                            }
+                        ?>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex p-4 rounded mb-4 bg-white">
+                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p class="mb-2">123 Street New York.USA</p>
+                                </div>
+                            </div>
+                            <div class="d-flex p-4 rounded mb-4 bg-white">
+                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Mail Us</h4>
+                                    <p class="mb-2">Fruitables@excorg.in</p>
+                                </div>
+                            </div>
+                            <div class="d-flex p-4 rounded bg-white">
+                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Telephone</h4>
+                                    <p class="mb-2">(+012) 3456 7890</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Cart Page End -->
+        <!-- Contact End -->
 
 
         <!-- Footer Start -->
@@ -322,7 +265,7 @@
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Account</h4>
                             <a class="btn-link" href="">My Account</a>
-                            <a class="btn-link" href="">Shop</a>
+                            <a class="btn-link" href="">Shop details</a>
                             <a class="btn-link" href="">Shopping Cart</a>
                             <a class="btn-link" href="">Wishlist</a>
                             <a class="btn-link" href="">Order History</a>
@@ -363,7 +306,9 @@
         <!-- Copyright End -->
 
 
-
+        <?php
+            ob_end_flush();
+        ?>
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
@@ -378,59 +323,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="../admin/js/jquery.js"></script>
     </body>
-    <script>
-        function removecfm(cid)
-        {
-            if(confirm("Are you sure to remove this item from CART !!"))
-            {
-                $.ajax({
-                    url: "itemDEL.php",
-                    method: "post",
-                    data: {"cartid": cid},
-                    success: function(response){
-                        // alert(response)
-                        window.location.href=""
-                    }
-                })
-            }
-        }
-        function decrease(cid,qty)
-        {
-            if(qty == 1)
-            {
-                $.ajax({
-                    url: "itemDEL.php",
-                    method: "post",
-                    data: {"cartid": cid},
-                    success: function(response){                        
-                        window.location.reload()
-                    }
-                })
-            }
-            else
-            {
-                $.ajax({
-                    url: "itemQTYdriver.php",
-                    method: "post",
-                    data: {"cartid": cid,"quantity": qty,"state": -1},
-                    success: function(response){
-                        window.location.reload()
-                    }
-                })
-            }
-        }
-        function increase(cid)
-        {
-            $.ajax({
-                url: "itemQTYdriver.php",
-                method: "post",
-                data: {"cartid": cid, "state": 1},
-                success: function(response){
-                    window.location.reload()
-                }
-            })
-        }
-    </script>
+
 </html>
